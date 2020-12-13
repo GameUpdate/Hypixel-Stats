@@ -85,6 +85,7 @@
     "unirest": "^0.6.0",
     "weather-js": "^2.0.0",
     "wit-node": "0.0.5",
+    "ytdl-core": "^4.1.4",
     "zlib": "^1.0.5"
   }
 }
