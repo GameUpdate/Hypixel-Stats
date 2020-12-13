@@ -86,7 +86,7 @@ module.exports = async (client, member) => {
 
         let invitee = await Profile.findOne({ guildID: member.guild.id, userID: member.user.id })
         if (!invitee) {
-            const newProfile = new Profile({ guildID: member.guild.id, userID: member.user.id, "pf.firstJoin": new Date() })
+            const newProfile = new Profile({ guildID: member.guild.id, userID: member.user.id, "pf.firstJoin": new Date(member.joinedAt) })
             newProfile.save().then(async () => {
                 invitee = Profile.findOne({ guildID: member.guild.id, userID: member.user.id })
                 invitee.isFake = fake

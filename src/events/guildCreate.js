@@ -28,7 +28,7 @@ module.exports = async (client, guild) => {
         if (user.bot) return
         let profile = await Profile.findOne({ guildID: guild.id, userID: user.id })
         if (profile) return
-        const newProfile = new Profile({ guildID: guild.id, userID: user.id, "pf.firstJoin": new Date() })
+        const newProfile = new Profile({ guildID: guild.id, userID: user.id, "pf.firstJoin": new Date(member.joinedAt) })
         newProfile.save().then(() => console.log(`New profile made for: ${user.username}`))
     })
 }
