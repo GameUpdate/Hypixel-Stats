@@ -36,6 +36,7 @@
     "discord.js-pagination": "^1.0.3",
     "distube": "^2.7.0",
     "ethereal-color": "0.0.5",
+    "fast-xml-parser": "^3.17.5",
     "ffmpeg-static": "^4.2.7",
     "fs": "0.0.1-security",
     "g-i-s": "^2.1.6",
@@ -55,6 +56,7 @@
     "nekos.life": "^2.0.7",
     "node-gyp": "^7.1.2",
     "node-opus": "0.3.3",
+    "node-tunein-radio": "^0.3.4",
     "node-wit": "^6.0.0",
     "nodemon": "^2.0.6",
     "numeral": "^2.0.6",
@@ -85,6 +87,7 @@
     "unirest": "^0.6.0",
     "weather-js": "^2.0.0",
     "wit-node": "0.0.5",
+    "xmlhttprequest": "^1.8.0",
     "ytdl-core": "^4.1.4",
     "zlib": "^1.0.5"
   }

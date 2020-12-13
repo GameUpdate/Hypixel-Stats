@@ -4,6 +4,7 @@ const { readdirSync } = require("fs")
 const mongoose = require('mongoose');
 const { Player } = require("discord-player");
 const { GiveawaysManager } = require("discord-giveaways");
+var TuneIn = require('node-tunein-radio');
 
 global.client = new Client();
 global.Server = require('./storage/newGuild.js')
@@ -112,5 +113,8 @@ giveawaysManager = new GiveawaysManager(client, {
     }
 });
 client.gaManager = giveawaysManager
+
+tunein = new TuneIn();
+client.radio = tunein
 
 client.login(config.bot_token);
