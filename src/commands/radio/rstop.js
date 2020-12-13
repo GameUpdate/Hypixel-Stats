@@ -12,7 +12,7 @@ module.exports = {
         if (!message.guild.me.voice.channel) {
             return message.channel.send(`Can't stop the radio if I'm not in a channel playing it`)
         } else {
-            message.guild.me.voice.leave()
+            message.guild.me.voice.channel.leave()
             return message.react(`👌`)
         }
     }
