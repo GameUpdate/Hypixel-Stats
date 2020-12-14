@@ -1,5 +1,4 @@
 const { MessageEmbed } = require("discord.js")
-const fetch = require('node-fetch');
 
 module.exports = {
     config: {
@@ -40,7 +39,7 @@ module.exports = {
                             const list = new MessageEmbed()
                                 .setTitle(`Stations for ${result.body[parseInt(content) - 1].text}`)
                                 .setDescription(catss.join(`\n`))
-                                .setFooter(`To play one of these stations use -rplay <id> (ex: -rplay s24861)\nTo search for a station use -rsearch <name>`)
+                                .setFooter(`To play one of these stations use ${server.bot_prefix}rplay <id> (ex: ${server.bot_prefix}rplay s24861)\nTo search for a station use ${server.bot_prefix}rsearch <name>`)
                                 .setColor(color)
                             return message.channel.send(list)
                         }).catch(function (err) {
@@ -65,7 +64,7 @@ module.exports = {
                 const list = new MessageEmbed()
                     .setTitle(`Best stations`)
                     .setDescription(cats.join(`\n`))
-                    .setFooter(`To play one of these stations use -rplay <id> (ex: -rplay s24861)\nTo search for a station use -rsearch <name>`)
+                    .setFooter(`To play one of these stations use ${server.bot_prefix}rplay <id> (ex: ${server.bot_prefix}rplay s24861)\nTo search for a station use ${server.bot_prefix}rsearch <name>`)
                     .setColor(color)
                 return message.channel.send(list)
             }).catch(function (err) {
@@ -78,7 +77,7 @@ module.exports = {
                 const list = new MessageEmbed()
                     .setTitle(`Most popular stations`)
                     .setDescription(cats.join(`\n`))
-                    .setFooter(`To play one of these stations use -rplay <id> (ex: -rplay s24861)\nTo search for a station use -rsearch <name>`)
+                    .setFooter(`To play one of these stations use ${server.bot_prefix}rplay <id> (ex: ${server.bot_prefix}rplay s24861)\nTo search for a station use ${server.bot_prefix}rsearch <name>`)
                     .setColor(color)
                 return message.channel.send(list)
             }).catch(function (err) {
@@ -107,7 +106,7 @@ module.exports = {
                             const list = new MessageEmbed()
                                 .setTitle(`Stations for ${result.body[parseInt(content) - 1].text}`)
                                 .setDescription(catss.join(`\n`))
-                                .setFooter(`To play one of these stations use -rplay <id> (ex: -rplay s24861)\nTo search for a station use -rsearch <name>`)
+                                .setFooter(`To play one of these stations use ${server.bot_prefix}rplay <id> (ex: ${server.bot_prefix}rplay s24861)\nTo search for a station use ${server.bot_prefix}rsearch <name>`)
                                 .setColor(color)
                             return message.channel.send(list)
                         }).catch(function (err) {
