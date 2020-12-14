@@ -61,7 +61,7 @@ module.exports = {
                 return FieldsEmbed.build();
             })
         } else if (args[0].toLowerCase() === 'bal') {
-            Profile.find({ "eco.bal": { $gt: 5000 }, guildID: { $eq: message.guild.id } }).sort({ "eco.bal": -1 }).then(async lb => {
+            Profile.find({ "eco.bal": { $gte: 5000 }, guildID: { $eq: message.guild.id } }).sort({ "eco.bal": -1 }).then(async lb => {
                 const users = await Promise.all(lb.map(async l => {
                     const user = await client.users.fetch(l.userID).catch(() => ({ tag: "Unknown#????", id: l.userID }));
                     return {
@@ -84,7 +84,7 @@ module.exports = {
                 return FieldsEmbed.build();
             })
         } else if (args[0].toLowerCase() === 'bank') {
-            Profile.find({ "eco.bank": { $gt: 0 }, guildID: { $eq: message.guild.id } }).sort({ "eco.bank": -1 }).then(async lb => {
+            Profile.find({ "eco.bank": { $gte: 0 }, guildID: { $eq: message.guild.id } }).sort({ "eco.bank": -1 }).then(async lb => {
                 const users = await Promise.all(lb.map(async l => {
                     const user = await client.users.fetch(l.userID).catch(() => ({ tag: "Unknown#????", id: l.userID }));
                     return {
@@ -107,7 +107,7 @@ module.exports = {
                 return FieldsEmbed.build();
             })
         } else if (args[0].toLowerCase() === 'invites') {
-            Profile.find({ "inv.invites": { $exists: 1 }, guildID: { $eq: message.guild.id } }).sort({ "inv.invites": -1 }).then(async lb => {
+            Profile.find({ "inv.invites": { $gte: 1 }, guildID: { $eq: message.guild.id } }).sort({ "inv.invites": -1 }).then(async lb => {
                 const users = await Promise.all(lb.map(async l => {
                     const user = await client.users.fetch(l.userID).catch(() => ({ tag: "Unknown#????", id: l.userID }));
                     return {
@@ -133,7 +133,7 @@ module.exports = {
                 return FieldsEmbed.build();
             })
         } else if (args[0].toLowerCase() === 'gems') {
-            Profile.find({ "eco.gems": { $gt: 0 }, guildID: { $eq: message.guild.id } }).sort({ "eco.gems": -1 }).then(async lb => {
+            Profile.find({ "eco.gems": { $gte: 1 }, guildID: { $eq: message.guild.id } }).sort({ "eco.gems": -1 }).then(async lb => {
                 const users = await Promise.all(lb.map(async l => {
                     const user = await client.users.fetch(l.userID).catch(() => ({ tag: "Unknown#????", id: l.userID }));
                     return {
