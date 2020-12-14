@@ -133,7 +133,7 @@ module.exports = {
                 return FieldsEmbed.build();
             })
         } else if (args[0].toLowerCase() === 'gems') {
-            Profile.find({ "eco.gems": { $gt: 1 }, guildID: { $eq: message.guild.id } }).sort({ "eco.gems": -1 }).then(async lb => {
+            Profile.find({ "eco.gems": { $gt: 0 }, guildID: { $eq: message.guild.id } }).sort({ "eco.gems": -1 }).then(async lb => {
                 const users = await Promise.all(lb.map(async l => {
                     const user = await client.users.fetch(l.userID).catch(() => ({ tag: "Unknown#????", id: l.userID }));
                     return {
