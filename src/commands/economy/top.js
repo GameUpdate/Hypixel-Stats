@@ -107,7 +107,7 @@ module.exports = {
                 return FieldsEmbed.build();
             })
         } else if (args[0].toLowerCase() === 'invites') {
-            Profile.find({ "inv.invites": { $gte: 1 }, guildID: { $eq: message.guild.id } }).sort({ "inv.invites": -1 }).then(async lb => {
+            Profile.find({ "inv.invites": { $gte: 0 }, guildID: { $eq: message.guild.id } }).sort({ "inv.invites": -1 }).then(async lb => {
                 const users = await Promise.all(lb.map(async l => {
                     const user = await client.users.fetch(l.userID).catch(() => ({ tag: "Unknown#????", id: l.userID }));
                     return {
