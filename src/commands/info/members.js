@@ -40,26 +40,20 @@ module.exports = {
             const filtered = await mm.sort(function (a, b) {
                 return (a.displayName.toUpperCase() < b.displayName.toUpperCase()) ? -1 : (a.displayName.toUpperCase() > b.displayName.toUpperCase()) ? 1 : 0;
             });
-            let pages = []
-            function createEmbed(start) {
-                const current = filtered.slice(start * 10, (start * 10) + 10);
-                let num;
-                if (typeof (start) === "string") {
-                    num = parseInt(start, 10);
-                } else {
-                    num = start + 1;
-                }
-                const mapped = current.map(m => `${m} • ${m.id}`).join("\n");
-                page = new MessageEmbed()
-                    .setTitle(`Members with the ${role.name} role`)
-                    .setDescription(`**Total Amount:** \`${role.members.size}\`\n${mapped}`)
-                    .setColor(color)
-                return pages[i] = page
-            }
-            for (i = 0; i < Math.floor(role.members.size / 10) + 1; i++) {
-                createEmbed(i)
-            }
-            return message.channel.send(paginationEmbed(message, pages))
+            const FieldsEmbed = new Pagination.FieldsEmbed();
+            FieldsEmbed.embed
+                .setColor(color)
+                .setTitle(`Members with the ${role.name} role`)
+                .setDescription(`Total amount: **${role.members.size}**`)
+
+            FieldsEmbed.setArray(filtered[0] ? filtered : [])
+                .setAuthorizedUsers([message.author.id])
+                .setChannel(message.channel)
+                .setElementsPerPage(10)
+                .formatField("** **", (m) => `${m} • ${m.id}`)
+                .setDisabledNavigationEmojis(['delete'])
+                .setPageIndicator('footer')
+            return FieldsEmbed.build();
         }
     }
 }
