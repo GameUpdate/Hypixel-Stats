@@ -4,11 +4,10 @@ const { readdirSync } = require("fs")
 const mongoose = require('mongoose');
 const { Player } = require("discord-player");
 const { GiveawaysManager } = require("discord-giveaways");
-var TuneIn = require('node-tunein-radio');
 
 global.client = new Client();
-global.Server = require('./storage/newGuild.js')
-global.Profile = require('./storage/newProfile.js')
+global.Guilds = require('./storage/newGuild.js')
+global.Profiles = require('./storage/newProfile.js')
 global.cmdTotal = 0
 global.msgsTotal = 0
 client.config = config
@@ -17,8 +16,6 @@ options.forEach(x => client[x] = new Collection());
 
 mongoose.connect(config.mongodb, { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
-db.collections.users.updateMany({ "lvl.canXP": false }, { $set: { "lvl.canXP": true } }, { multi: true });
-db.collections.users.updateMany({ "rooms.open": true }, { $set: { "rooms.open": false } }, { multi: true });
 
 readdirSync(`./src/commands/`).forEach(dirs => {
     const commands = readdirSync(`./src/commands/${dirs}/`).filter(d => d.endsWith('.js'));
@@ -30,7 +27,6 @@ readdirSync(`./src/commands/`).forEach(dirs => {
         client.cooldowns.set(pull.config.name, new Collection())
         pull.config.admin ? client.admin.set(pull.config.name, pull.config.admin) : client.admin.set(pull.config.name, false)
         if (pull.config.usage) pull.config.usage.forEach(a => client.usage.set(pull.config.name, a))
-        pull.config.nsfw ? client.nsfw.set(pull.config.name, pull.config.nsfw) : client.nsfw.set(pull.config.name, false)
         pull.config.desc ? client.desc.set(pull.config.name, pull.config.desc) : client.desc.set(pull.config.name, `No description has been set for this command`)
     };
 })
@@ -41,10 +37,6 @@ for (let file of events) {
     let eName = file.split('.')[0];
     client.on(eName, evt.bind(null, client));
 };
-
-process.on('unhandledRejection', error => {
-    if (error.message.includes('Unknown Channel')) return
-});
 
 const player = new Player(client);
 client.player = player;
@@ -113,8 +105,5 @@ giveawaysManager = new GiveawaysManager(client, {
     }
 });
 client.gaManager = giveawaysManager
-
-tunein = new TuneIn();
-client.radio = tunein
 
 client.login(config.bot_token);

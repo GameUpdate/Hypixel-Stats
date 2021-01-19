@@ -1,8 +1,5 @@
 const Canvas = require("canvas")
 const { MessageAttachment } = require("discord.js");
-const { resolve } = require("path");
-Canvas.registerFont(resolve("./storage/fonts/theboldfont.ttf"), { family: "Bold" });
-Canvas.registerFont(resolve("./storage/fonts/SketchMatch.ttf"), { family: "SketchMatch" });
 
 const applyText = (canvas, text, defaultFontSize) => {
     const ctx = canvas.getContext("2d");

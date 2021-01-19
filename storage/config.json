@@ -1,6 +1,6 @@
 {
     "bot_token": "ODAwODM1MzcxMDAzODA1NzI4.YAX6Dw.Vo6mGI4JiugfYksEeOK1MXzB6cQ",
-    "mongodb": "mongodb+srv://vps:joeclarke@cluster0-oncqo.mongodb.net/Chloe?retryWrites=true&w=majority",
+    "mongodb": "mongodb+srv://vps:joeclarke@cluster0-oncqo.mongodb.net/Blockify?retryWrites=true&w=majority",
     "ownerID": "197443943284211712",
     "ownerTag": "Game#0005"
 }
