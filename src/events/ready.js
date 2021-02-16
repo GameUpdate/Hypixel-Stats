@@ -1,7 +1,7 @@
 
 module.exports = async (client) => {
 
-    client.user.setActivity("twitch", { type: 'LISTENTING', url: `https://twitch.tv/mizkif` });
+    client.user.setActivity("you on hypixel", { type: 'WATCHING' });
 
     console.clear()
     console.log('Ready...')

@@ -1,17 +1,22 @@
 const { Client, Collection, MessageEmbed } = require("discord.js");
 const config = require("./storage/config.json");
+const roles = require("./storage/roles.json");
+const elo = require("./storage/elo.json");
+const queues = require("./storage/queues.json");
 const { readdirSync } = require("fs")
 const mongoose = require('mongoose');
-const { Player } = require("discord-player");
-const { GiveawaysManager } = require("discord-giveaways");
 
+global.totalGames = 0
 global.client = new Client();
 global.Guilds = require('./storage/newGuild.js')
 global.Profiles = require('./storage/newProfile.js')
-global.cmdTotal = 0
-global.msgsTotal = 0
+client.hyp = require('hypixel-api-wrapper')
+client.hyp.setKey('207ae7a8-88c7-4154-8e03-d1b80ad08871')
 client.config = config
-let options = ["commands", "aliases", "memberPerms", "cooldowns", "admin", "enabled", "nsfw", "desc", "invites", "usage"]
+client.roles = roles
+client.elo = elo
+client.queues = queues
+let options = ["commands", "aliases", "memberPerms", "cooldowns", "admin", "desc", "usage"]
 options.forEach(x => client[x] = new Collection());
 
 mongoose.connect(config.mongodb, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -37,73 +42,5 @@ for (let file of events) {
     let eName = file.split('.')[0];
     client.on(eName, evt.bind(null, client));
 };
-
-const player = new Player(client);
-client.player = player;
-client.player
-    .on("trackStart", (message, track) => {
-        message.channel.send(`Now playing: \`${track.title}\``)
-    })
-    .on("playlistStart", (message, queue, playlist, track) => {
-        message.channel.send(`Now playing: \`${track.title}\``)
-    })
-    .on("searchResults", (message, query, tracks) => {
-        if (tracks.length > 20) tracks = tracks.slice(0, 20);
-        const embed = new MessageEmbed()
-            .setDescription(tracks.map((t, i) => `**${++i} -** ${t.title}`).join("\n"))
-            .setFooter(`Pick a song using a track number`)
-            .setColor(`#2F3136`);
-        message.channel.send(embed);
-    })
-    .on("searchInvalidResponse", (message, query, tracks) => {
-        message.channel.send(`Couldn't find that song, try a number between **1** and **${tracks.length}**`)
-    })
-    .on("searchCancel", (message) => {
-        message.channel.send(`Time's up, too late`)
-    })
-    .on("botDisconnect", (message) => {
-        message.channel.send(`I left the call`)
-    })
-    .on("noResults", (message) => {
-        message.channel.send(`Couldn't find anything`)
-    })
-    .on("queueEnd", (message) => {
-        message.channel.send(`Queue is over`)
-    })
-    .on("playlistAdd", (message, queue, playlist) => {
-        message.channel.send(`Added **${playlist.tracks.length}** songs from playlist \`${playlist.title}\``)
-    })
-    .on("trackAdd", (message, queue, track) => {
-        message.channel.send(`Added \`${track.title}\``)
-    })
-    .on("channelEmpty", () => {
-        // do nothing, leaveOnEmpty is not enabled
-    })
-    .on("error", (message, error) => {
-        switch (error) {
-            case "NotConnected":
-                message.channel.send(`You're not in a voice channel`)
-                break;
-            case "UnableToJoin":
-                message.channel.send(`Can't join that channel`);
-                break;
-            case "NotPlaying":
-                message.channel.send(`I'm not playing anything atm`);
-                break;
-        }
-    });
-
-giveawaysManager = new GiveawaysManager(client, {
-    storage: "./storage/jsons/giveaways.json",
-    updateCountdownEvery: 10000,
-    default: {
-        botsCanWin: false,
-        exemptPermissions: ["MANAGE_MESSAGES", "ADMINISTRATOR"],
-        embedColor: "#2F3136",
-        embedColorEnd: "#2F3136",
-        reaction: "🎉"
-    }
-});
-client.gaManager = giveawaysManager
 
 client.login(config.bot_token);

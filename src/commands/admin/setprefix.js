@@ -10,7 +10,6 @@ module.exports = {
         usage: [`setp <new prefix>`]
     },
     run: async (server, message, args) => {
-        const color = server.color;
 
         if (!args[0]) { return message.channel.send("Can't set my prefix to nothing you silly goose") }
 

@@ -5,7 +5,6 @@ module.exports = {
         name: `setup`,
     },
     run: async (server, profile, message, args) => {
-        const color = server.color;
 
         let members = await message.guild.members.fetch()
         members.forEach(async (member) => {

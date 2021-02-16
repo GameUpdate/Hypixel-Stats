@@ -9,19 +9,12 @@ module.exports = async (client, message) => {
     const command = args.shift().toLowerCase();
     const now = Date.now();
 
-    const profile = await utils.findOrCreateUser(message.guild.id, message.author)
-    profile.pf.msgTotal++
-    await profile.save()
-
-    msgsTotal++
-    if (message.author.id != client.config.ownerID && message.author.id != message.guild.ownerID && server.filter.includes(message.channel.id)) return
     const botWasMentioned = (message.content === `<@!${client.user.id}>` || message.content === `<@!${client.user.id}>` || message.content === `<@${client.user.id}>` || message.content === `<@${client.user.id}> `)
     if (botWasMentioned) return message.channel.send(`Hi my prefix is \`${server.bot_prefix}\`\nUse \`${server.bot_prefix}help\` to see all available commands`)
 
     if (!message.content.startsWith(server.bot_prefix)) return;
     let commandfile = client.commands.get(command) || client.commands.get(client.aliases.get(command) || client.commands.get(command.toLowerCase()));
     if (!commandfile) return
-    cmdTotal++
 
     if (message.author.id != client.config.ownerID) {
         if (client.admin.get(commandfile.config.name) && !message.member.permissions.has(`ADMINISTRATOR`)) return message.channel.send(`Only admins of the server can use the \`${commandfile.config.name}\` command.`);
@@ -46,7 +39,7 @@ module.exports = async (client, message) => {
         }
     }
 
-    commandfile.run(server, profile, message, args);
+    commandfile.run(server, message, args);
     timestamps.set(message.author.id, now);
     setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
     return

@@ -9,7 +9,6 @@ module.exports = {
         usage: [`ping`]
     },
     run: async (server, message, args) => {
-        const color = server.color;
 
         let pingEmbed = new MessageEmbed()
             .setColor(color)
