@@ -346,7 +346,13 @@ const gameSetup = async (vc) => {
                             });
 
                             collector.on('end', collected => {
-                              
+                              if (map1Pickers.length >= map2Pickers.length && map1Pickers.length >= rrPickers.length) {
+                                // start with map 1
+                              } else if (map2Pickers.length >= map1Pickers.length && map2Pickers.length >= rrPickers.length) {
+                                // start with map 2
+                              } else if (rrPickers.length >= map1Pickers.length && rrPickers.length >= map2Pickers.length) {
+                                // redo map voting
+                              }
                             });
                           })
                         })
