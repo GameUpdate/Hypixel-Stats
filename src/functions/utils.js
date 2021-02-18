@@ -329,17 +329,32 @@ const gameSetup = async (vc) => {
                             await pickingMsg.react(`1️⃣`); await pickingMsg.react(`2️⃣`); await pickingMsg.react(`🔁`)
                             const filter = (reaction, user) => team1.some(u => u.id === user.id);
                             const collector = pickingMsg.createReactionCollector(filter, { time: 30000 });
-                            collector.on('collect', (r, u) => {
+                            collector.on('collect', async (r, u) => {
                               pickingMsg.reactions.cache.get(r._emoji.id).users.remove(u.id)
                               if (r._emoji.name === "one") {
                                 count++
                                 map1Pickers.push(u)
+                                mapPicking.fields.length = 0
+                                mapPicking.addField(`1️⃣ ${map1.name}`, map1Pickers[0] ? map1Pickers.join(`\n`) : `No one`)
+                                mapPicking.addField(`2️⃣ ${map2.name}`, map2Pickers[0] ? map2Pickers.join(`\n`) : `No one`)
+                                mapPicking.addField(`🔁 Reroll`, rrPickers[0] ? rrPickers.join(`\n`) : `No one`)
+                                await pickingMsg.edit(mapPicking)
                               } else if (r._emoji.name === "two") {
                                 count++
                                 map2Pickers.push(u)
+                                mapPicking.fields.length = 0
+                                mapPicking.addField(`1️⃣ ${map1.name}`, map1Pickers[0] ? map1Pickers.join(`\n`) : `No one`)
+                                mapPicking.addField(`2️⃣ ${map2.name}`, map2Pickers[0] ? map2Pickers.join(`\n`) : `No one`)
+                                mapPicking.addField(`🔁 Reroll`, rrPickers[0] ? rrPickers.join(`\n`) : `No one`)
+                                await pickingMsg.edit(mapPicking)
                               } else if (r._emoji.name === "repeat") {
                                 count++
                                 rrPickers.push(u)
+                                mapPicking.fields.length = 0
+                                mapPicking.addField(`1️⃣ ${map1.name}`, map1Pickers[0] ? map1Pickers.join(`\n`) : `No one`)
+                                mapPicking.addField(`2️⃣ ${map2.name}`, map2Pickers[0] ? map2Pickers.join(`\n`) : `No one`)
+                                mapPicking.addField(`🔁 Reroll`, rrPickers[0] ? rrPickers.join(`\n`) : `No one`)
+                                await pickingMsg.edit(mapPicking)
                               }
 
                               if (count === 8) collector.stop()
