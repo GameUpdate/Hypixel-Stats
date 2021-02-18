@@ -1,0 +1,38 @@
+[
+    {
+        "enabled": true,
+        "name": "Extinction",
+        "url": "https://hypixel.net/attachments/extiction-png.2337679/",
+        "height": "95"
+    },
+    {
+        "enabled": true,
+        "name": "Relic",
+        "url": "https://hypixel.net/attachments/relic-png.2337680/",
+        "height": "95"
+    },
+    {
+        "enabled": true,
+        "name": "Holmgang",
+        "url": "https://hypixel.net/attachments/holmgang-png.2337681/",
+        "height": "95"
+    },
+    {
+        "enabled": true,
+        "name": "Catalyst",
+        "url": "https://hypixel.net/attachments/catalyst-png.2337691/",
+        "height": "95"
+    },
+    {
+        "enabled": true,
+        "name": "Enchanted",
+        "url": "https://hypixel.net/attachments/enchanted-png.2337693/",
+        "height": "95"
+    },
+    {
+        "enabled": true,
+        "name": "Unturned",
+        "url": "https://hypixel.net/attachments/unturned-png.2337694/",
+        "height": "95"
+    }
+]

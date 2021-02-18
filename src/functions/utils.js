@@ -294,9 +294,60 @@ const gameSetup = async (vc) => {
                             t2m[2].voice.setChannel(t2vc)
                             t2m[3].voice.setChannel(t2vc)
 
-                            
+                            let map1 = client.maps[Math.floor(Math.random() * client.maps.length)]
+                            while (!map1.enabled) map1 = client.maps[Math.floor(Math.random() * client.maps.length)]
+                            let map2 = client.maps[Math.floor(Math.random() * client.maps.length)]
+                            while (map2.name === map1.name) {
+                              map2 = client.maps[Math.floor(Math.random() * client.maps.length)]
+                              while (!map2.enabled) map2 = client.maps[Math.floor(Math.random() * client.maps.length)]
+                            }
 
+                            let map1Pickers = []; let map2Pickers = []; let rrPickers = []
+                            let map1Embed = new MessageEmbed()
+                              .setColor(client.config.color)
+                              .setTitle(`1️⃣ ${map1.name}`)
+                              .setImage(map1.url)
+                              .setFooter(`Map height: ${map1.height} blocks`)
+                            let map2Embed = new MessageEmbed()
+                              .setColor(client.config.color)
+                              .setTitle(`2️⃣ ${map2.name}`)
+                              .setImage(map2.url)
+                              .setFooter(`Map height: ${map2.height} blocks`)
+                            let map1Msg = await c.send(map1Embed)
+                            let map2Msg = await c.send(map2Embed)
 
+                            let mapPicking = new MessageEmbed()
+                              .setColor(client.config.color)
+                              .setTitle(`Map Picking`)
+                              .addField(`1️⃣ ${map1.name}`, map1Pickers[0] ? map1Pickers.join(`\n`) : `No one`)
+                              .addField(`2️⃣ ${map2.name}`, map2Pickers[0] ? map2Pickers.join(`\n`) : `No one`)
+                              .addField(`🔁 Reroll`, rrPickers[0] ? rrPickers.join(`\n`) : `No one`)
+                              .setFooter(`React to vote for a map or reroll them`)
+
+                            let pickingMsg = await c.send(mapPicking)
+                            let count = 0
+                            await pickingMsg.react(`1️⃣`); await pickingMsg.react(`2️⃣`); await pickingMsg.react(`🔁`)
+                            const filter = (reaction, user) => team1.some(u => u.id === user.id);
+                            const collector = pickingMsg.createReactionCollector(filter, { time: 30000 });
+                            collector.on('collect', (r, u) => {
+                              pickingMsg.reactions.cache.get(r._emoji.id).users.remove(u.id)
+                              if (r._emoji.name === "one") {
+                                count++
+                                map1Pickers.push(u)
+                              } else if (r._emoji.name === "two") {
+                                count++
+                                map2Pickers.push(u)
+                              } else if (r._emoji.name === "repeat") {
+                                count++
+                                rrPickers.push(u)
+                              }
+
+                              if (count === 8) collector.stop()
+                            });
+
+                            collector.on('end', collected => {
+                              
+                            });
                           })
                         })
                       }

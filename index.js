@@ -15,6 +15,7 @@ client.hyp.setKey('207ae7a8-88c7-4154-8e03-d1b80ad08871')
 client.config = config
 client.roles = roles
 client.elo = elo
+client.maps = maps
 client.queues = queues
 let options = ["commands", "aliases", "memberPerms", "cooldowns", "admin", "desc", "usage"]
 options.forEach(x => client[x] = new Collection());
