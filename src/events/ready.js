@@ -1,7 +1,7 @@
 
 module.exports = async (client) => {
 
-    client.user.setActivity("you on hypixel", { type: 'WATCHING' });
+    client.user.setActivity("your games", { type: 'WATCHING' });
 
     console.clear()
     console.log('Ready...')
