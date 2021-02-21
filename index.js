@@ -2,6 +2,7 @@ const { Client, Collection, MessageEmbed } = require("discord.js");
 const config = require("./storage/config.json");
 const roles = require("./storage/roles.json");
 const elo = require("./storage/elo.json");
+const maps = require("./storage/maps.json");
 const queues = require("./storage/queues.json");
 const { readdirSync } = require("fs")
 const mongoose = require('mongoose');
