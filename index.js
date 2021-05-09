@@ -1,23 +1,12 @@
-const { Client, Collection, MessageEmbed } = require("discord.js");
+const { Client, Collection } = require("discord.js");
 const config = require("./storage/config.json");
-const roles = require("./storage/roles.json");
-const elo = require("./storage/elo.json");
-const maps = require("./storage/maps.json");
-const queues = require("./storage/queues.json");
 const { readdirSync } = require("fs")
 const mongoose = require('mongoose');
 
-global.totalGames = 0
 global.client = new Client();
 global.Guilds = require('./storage/newGuild.js')
 global.Profiles = require('./storage/newProfile.js')
-client.hyp = require('hypixel-api-wrapper')
-client.hyp.setKey('207ae7a8-88c7-4154-8e03-d1b80ad08871')
 client.config = config
-client.roles = roles
-client.elo = elo
-client.maps = maps
-client.queues = queues
 let options = ["commands", "aliases", "memberPerms", "cooldowns", "admin", "desc", "usage"]
 options.forEach(x => client[x] = new Collection());
 

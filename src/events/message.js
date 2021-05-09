@@ -5,14 +5,15 @@ module.exports = async (client, message) => {
     if (!message.guild) return
 
     const server = await utils.findOrCreateGuild(message.guild.id)
-    const args = message.content.slice(server.bot_prefix.length).trim().split(/ +/g);
+    const pf = await utils.findOrCreateUser(message.guild.id, message.author)
+    const args = message.content.slice(server.prefix.length).trim().split(/ +/g);
     const command = args.shift().toLowerCase();
     const now = Date.now();
 
     const botWasMentioned = (message.content === `<@!${client.user.id}>` || message.content === `<@!${client.user.id}>` || message.content === `<@${client.user.id}>` || message.content === `<@${client.user.id}> `)
-    if (botWasMentioned) return message.channel.send(`Hi my prefix is \`${server.bot_prefix}\`\nUse \`${server.bot_prefix}help\` to see all available commands`)
+    if (botWasMentioned) return message.channel.send(`Hi my prefix is \`${server.prefix}\`\nUse \`${server.prefix}help\` to see all available commands`)
 
-    if (!message.content.startsWith(server.bot_prefix)) return;
+    if (!message.content.startsWith(server.prefix)) return;
     let commandfile = client.commands.get(command) || client.commands.get(client.aliases.get(command) || client.commands.get(command.toLowerCase()));
     if (!commandfile) return
 

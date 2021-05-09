@@ -1,7 +1,7 @@
 
 module.exports = async (client) => {
 
-    client.user.setActivity("your games", { type: 'WATCHING' });
+    client.user.setActivity("bedwars", { type: 'PLAYING' });
 
     console.clear()
     console.log('Ready...')

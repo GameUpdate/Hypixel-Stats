@@ -11,7 +11,7 @@ module.exports = {
     run: async (server, message, args) => {
 
         let pingEmbed = new MessageEmbed()
-            .setColor(color)
+            .setColor(server.color)
             .setTitle("Pinging...")
 
         message.channel.send(pingEmbed).then(m => {
