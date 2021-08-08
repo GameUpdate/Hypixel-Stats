@@ -13,7 +13,7 @@ module.exports = {
     run: async (server, message, args, pf) => {
 
         let CpuUsed; let RAMUsed; let RAMMax; let RAMPercent;
-        await si.currentLoad().then(data => CpuUsed = `${(data.currentload).toFixed(2)}%`).catch(error => console.error(error));
+        await si.currentLoad().then(data => CpuUsed = `${(data.currentLoad).toFixed(2)}%`).catch(error => console.error(error));
         await si.mem().then(data => { RAMMax = `${((data.total) / 1070386380.80).toFixed(2)} GB`; RAMUsed = `${((data.used) / 1070386380.80).toFixed(2)} GB` }).catch(error => console.error(error));
         RAMPercent = `${((parseFloat(RAMUsed) / parseFloat(RAMMax)) * 100).toFixed(2)}%`
 
