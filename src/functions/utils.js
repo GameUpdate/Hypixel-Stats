@@ -1,6 +1,30 @@
-const index = require(`../../index.js`)
 const { readdirSync } = require("fs")
-const { MessageEmbed } = require("discord.js")
+const defaultPlusColor = 'c'; // %p
+const defaultRankColor = '6'; // %r
+
+const ranks = {
+  "YOUTUBER": [
+    "https://gameupdate.me/pics/youtube.png"
+  ],
+  "SUPERSTAR": [
+    "https://gameupdate.me/pics/mvp++.png"
+  ],
+  "MVP_PLUS": [
+    "https://gameupdate.me/pics/mvp+.png"
+  ],
+  "MVP": [
+    "https://gameupdate.me/pics/mvp.png"
+  ],
+  "VIP_PLUS": [
+    "https://gameupdate.me/pics/vip+.png"
+  ],
+  "VIP": [
+    "https://gameupdate.me/pics/vip.png"
+  ],
+  "DEFAULT": [
+    'https://gameupdate.me/pics/hypixel.png'
+  ]
+};
 
 const findOrCreateUser = async (guildID, user) => {
   let profile = await Profiles.findOne({ guildID: guildID, userID: user.id })
@@ -45,7 +69,32 @@ const eventSetup = async () => {
   };
 }
 
+const findRank = async (player) => {
+  if (player && typeof player === "object") {
+    let packageRank = player.packageRank;
+    let newPackageRank = player.newPackageRank;
+    let monthlyPackageRank = player.monthlyPackageRank;
+    let rank = player.rank;
+
+    if (rank === "NORMAL") rank = null;
+    if (monthlyPackageRank === "NONE") monthlyPackageRank = null;
+    if (packageRank === "NONE") packageRank = null;
+    if (newPackageRank === "NONE") newPackageRank = null;
+
+    if (rank || monthlyPackageRank || newPackageRank || packageRank) return ranks[rank || monthlyPackageRank || newPackageRank || packageRank][0];
+  }
+  return 'https://gameupdate.me/pics/hypixel.png'
+}
+
+const checkValues = async (val) => {
+  if (!val) return `∅`
+  if (isNaN(val) && !val.includes('⋆')) return `∅`
+  return val
+}
+
 exports.findOrCreateUser = findOrCreateUser;
 exports.findOrCreateGuild = findOrCreateGuild;
+exports.findRank = findRank;
+exports.checkValues = checkValues;
 exports.cmdSetup = cmdSetup;
 exports.eventSetup = eventSetup;

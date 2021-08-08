@@ -2,10 +2,14 @@ const { Client, Collection } = require("discord.js");
 const config = require("./storage/config.json");
 const { readdirSync } = require("fs")
 const mongoose = require('mongoose');
+const { HypixelAPI } = require('hypixel-api-v2');
 
-global.client = new Client();
+global.hypixel = new HypixelAPI(['fb40444b-995c-4a2e-a4a3-220c7effb647', '32c6fb49-9b0b-4b1a-97fa-2633b18cd2eb']);
+global.client = new Client({ intents: ['GUILDS', 'GUILD_MESSAGES'] })
 global.Guilds = require('./storage/newGuild.js')
 global.Profiles = require('./storage/newProfile.js')
+global.cmdTotal = 0
+global.msgsTotal = 0
 client.config = config
 let options = ["commands", "aliases", "memberPerms", "cooldowns", "admin", "desc", "usage"]
 options.forEach(x => client[x] = new Collection());

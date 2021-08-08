@@ -9,6 +9,7 @@ module.exports = async (client, message) => {
     const args = message.content.slice(server.prefix.length).trim().split(/ +/g);
     const command = args.shift().toLowerCase();
     const now = Date.now();
+    msgsTotal++
 
     const botWasMentioned = (message.content === `<@!${client.user.id}>` || message.content === `<@!${client.user.id}>` || message.content === `<@${client.user.id}>` || message.content === `<@${client.user.id}> `)
     if (botWasMentioned) return message.channel.send(`Hi my prefix is \`${server.prefix}\`\nUse \`${server.prefix}help\` to see all available commands`)
@@ -40,7 +41,9 @@ module.exports = async (client, message) => {
         }
     }
 
-    commandfile.run(server, message, args);
+    msgsTotal--
+    cmdTotal++
+    commandfile.run(server, message, args, pf);
     timestamps.set(message.author.id, now);
     setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
     return

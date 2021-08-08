@@ -8,16 +8,16 @@ module.exports = {
         desc: "Get bot ping to the api and host",
         usage: [`ping`]
     },
-    run: async (server, message, args) => {
+    run: async (server, message, args, pf) => {
 
         let pingEmbed = new MessageEmbed()
-            .setColor(server.color)
+            .setColor(pf.color)
             .setTitle("Pinging...")
 
-        message.channel.send(pingEmbed).then(m => {
+        message.channel.send({content: `\u200b`, embeds: [pingEmbed]}).then(m => {
             let ping = m.createdTimestamp - message.createdTimestamp
-            pingEmbed.setDescription(`Uptime: \`${ms(client.uptime)}\`\nBot Latency: \`${ping} ms\`\n API Latency: \`${Math.round(client.ws.ping)} ms\``).setTitle(`:ping_pong: Pong!`)
-            m.edit(pingEmbed)
+            pingEmbed.setDescription(`Bot Latency: \`${ping} ms\`\n API Latency: \`${Math.round(client.ws.ping)} ms\``).setTitle(`Hypixel Stats | Ping`)
+            m.edit({content: `\u200b`, embeds: [pingEmbed]})
         })
     }
 }
