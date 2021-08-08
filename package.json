@@ -1,0 +1,29 @@
+{
+  "name": "hypixel-stats",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "discord.js": "^13.0.1",
+    "fs": "0.0.1-security",
+    "hypixel-api-v2": "^1.3.6",
+    "moment": "^2.29.1",
+    "mongoose": "^5.13.5",
+    "ms": "^2.1.3",
+    "systeminformation": "^5.8.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GameUpdate/Hypixel-Stats.git"
+  },
+  "author": "game",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GameUpdate/Hypixel-Stats/issues"
+  },
+  "homepage": "https://github.com/GameUpdate/Hypixel-Stats#readme"
+}
