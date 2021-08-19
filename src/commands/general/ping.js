@@ -5,8 +5,7 @@ module.exports = {
     config: {
         name: "ping",
         aliases: ['pong'],
-        desc: "Get bot ping to the api and host",
-        usage: [`ping`]
+        description: "Get bot ping to the api and host",
     },
     run: async (server, message, args, pf) => {
 

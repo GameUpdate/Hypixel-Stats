@@ -2,8 +2,7 @@
 module.exports = {
     config: {
         name: "reload",
-        desc: "Reload a command [Only for the bot creator]",
-        usage: ["reload <command>"],
+        description: "Reload a command [Only for the bot creator]",
         admin: true
     },
     run: async (server, message, args) => {

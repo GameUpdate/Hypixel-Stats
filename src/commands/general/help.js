@@ -5,8 +5,7 @@ module.exports = {
     config: {
         name: "help",
         aliases: ['h'],
-        desc: "Get bot ping to the api and host",
-        usage: [`help`]
+        description: "Get bot ping to the api and host",
     },
     run: async (server, message, args, pf) => {
 
@@ -17,7 +16,8 @@ module.exports = {
         **${server.prefix}color [color]** ↦ Change your embed color
         **${server.prefix}link <ign>** ↦ Link an ign to your discord account
         **${server.prefix}ping** ↦ Get the bot's ping
-        **${server.prefix}info** ↦ Get info about the bot\n
+        **${server.prefix}info** ↦ Get info about the bot
+        **${server.prefix}invite** ↦ Get an invite link for the bot\n
         **${server.prefix}setprefix <prefix>** ↦ Change the bot's prefix`)
             .setFooter(`<> ↦ Necessary Arguments | [] ↦ Optional Arguments`)
 

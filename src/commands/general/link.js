@@ -4,8 +4,7 @@ module.exports = {
     config: {
         name: "link",
         aliases: ['l'],
-        desc: "Link an ign to your discord",
-        usage: [`link <ign>`]
+        description: "Link an ign to your discord",
     },
     run: async (server, message, args, pf) => {
 

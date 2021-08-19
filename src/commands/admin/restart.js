@@ -2,8 +2,7 @@
 module.exports = {
     config: {
         name: "restart",
-        desc: "Restarts the bot",
-        usage: [`restart`],
+        description: "Restarts the bot",
         admin: true
     },
     run: async (server, message, args) => {

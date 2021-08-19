@@ -2,8 +2,7 @@
 module.exports = {
     config: {
         name: "eval",
-        desc: "Evaluate code through the console [Only for the bot creator]",
-        usage: [`eval <code>`],
+        description: "Evaluate code through the console [Only for the bot creator]",
         admin: true
     },
     run: async (server, message, args) => {

@@ -4,8 +4,7 @@ module.exports = {
     config: {
         name: "color",
         aliases: ['c'],
-        desc: "Change your embed color",
-        usage: [`c [hex code]`]
+        description: "Change your embed color",
     },
     run: async (server, message, args, pf) => {
 

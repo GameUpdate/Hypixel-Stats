@@ -1,6 +1,6 @@
 const { readdirSync } = require("fs")
-const defaultPlusColor = 'c'; // %p
-const defaultRankColor = '6'; // %r
+const { REST } = require('@discordjs/rest');
+const { Routes } = require('discord-api-types/v9');
 
 const ranks = {
   "YOUTUBER": [
@@ -26,12 +26,12 @@ const ranks = {
   ]
 };
 
-const findOrCreateUser = async (guildID, user) => {
-  let profile = await Profiles.findOne({ guildID: guildID, userID: user.id })
+const findOrCreateUser = async (user) => {
+  let profile = await Profiles.findOne({ userID: user.id })
   if (profile) return profile
-  const newProfile = new Profiles({ guildID: guildID, userID: user.id, tag: user.tag })
+  const newProfile = new Profiles({ userID: user.id, tag: user.tag })
   await newProfile.save()
-  let pf = await Profiles.findOne({ guildID: guildID, userID: user.id })
+  let pf = await Profiles.findOne({ userID: user.id })
   if (pf) return pf
 }
 
@@ -87,7 +87,7 @@ const findRank = async (player) => {
 }
 
 const checkValues = async (val) => {
-  if (!val) return `∅`
+  if (!val && val != 0) return `∅`
   if (isNaN(val) && !val.includes('⋆')) return `∅`
   return val
 }

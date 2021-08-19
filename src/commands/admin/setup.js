@@ -9,7 +9,7 @@ module.exports = {
 
         let members = await message.guild.members.fetch()
         members.forEach(async (member) => {
-            await utils.findOrCreateUser(message.guild.id, member.user)
+            await utils.findOrCreateUser(member.user)
         })
     }
 }

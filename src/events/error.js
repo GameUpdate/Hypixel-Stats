@@ -3,5 +3,5 @@ module.exports = async (err) => {
 }
 
 process.on('unhandledRejection', error => {
-    return
+    return console.log(error)
 });

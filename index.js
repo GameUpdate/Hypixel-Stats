@@ -1,5 +1,6 @@
 const { Client, Collection } = require("discord.js");
 const config = require("./storage/config.json");
+const utils = require("./src/functions/utils.js");
 const { readdirSync } = require("fs")
 const mongoose = require('mongoose');
 const { HypixelAPI } = require('hypixel-api-v2');
@@ -11,23 +12,24 @@ global.Profiles = require('./storage/newProfile.js')
 global.cmdTotal = 0
 global.msgsTotal = 0
 client.config = config
-let options = ["commands", "aliases", "memberPerms", "cooldowns", "admin", "desc", "usage"]
+let cmdList = []
+let options = ["commands", "aliases", "memberPerms", "cooldowns", "admin", "description", "usage"]
 options.forEach(x => client[x] = new Collection());
 
 mongoose.connect(config.mongodb, { useNewUrlParser: true, useUnifiedTopology: true });
-const db = mongoose.connection;
 
 readdirSync(`./src/commands/`).forEach(dirs => {
     const commands = readdirSync(`./src/commands/${dirs}/`).filter(d => d.endsWith('.js'));
     for (let file of commands) {
         let pull = require(`./src/commands/${dirs}/${file}`);
+        cmdList.push(pull.config)
         client.commands.set(pull.config.name, pull);
         if (pull.config.aliases) pull.config.aliases.forEach(a => client.aliases.set(a, pull.config.name))
         if (pull.config.memberPerms) pull.config.memberPerms.forEach(a => client.memberPerms.set(pull.config.name, a))
         client.cooldowns.set(pull.config.name, new Collection())
         pull.config.admin ? client.admin.set(pull.config.name, pull.config.admin) : client.admin.set(pull.config.name, false)
         if (pull.config.usage) pull.config.usage.forEach(a => client.usage.set(pull.config.name, a))
-        pull.config.desc ? client.desc.set(pull.config.name, pull.config.desc) : client.desc.set(pull.config.name, `No description has been set for this command`)
+        pull.config.description ? client.description.set(pull.config.name, pull.config.description) : client.description.set(pull.config.name, `No description has been set for this command`)
     };
 })
 

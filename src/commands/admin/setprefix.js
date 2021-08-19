@@ -4,10 +4,8 @@ module.exports = {
     config: {
         name: `setprefix`,
         aliases: ['setp'],
-        memberPerms: ['ADMINISTRATOR'],
         admin: true,
-        desc: `Change the prefix of the bot`,
-        usage: [`setp <new prefix>`]
+        description: `Change the prefix of the bot`,
     },
     run: async (server, message, args) => {
 

@@ -1,6 +1,7 @@
 {
-    "bot_token": "ODczNTEwMDEzOTgzOTE2MDQy.YQ5dmA.Ct6dQuPPOsAeKGPd2rE82WywQMI",
+    "bot_token": "ODc3NjA5NTI0NDI3NjQ0OTY5.YR1Hjw.FQQ8hJh2kVEwv7buyh6Loy9DTdk",
     "mongodb": "mongodb+srv://vps:joeclarke@cluster0-oncqo.mongodb.net/Stats?retryWrites=true&w=majority",
+    "rbw": "mongodb+srv://game:qsI7bzFhHdYX3nr8@cluster0.tzszx.mongodb.net/rbw_next?retryWrites=true&w=majority",
     "ownerID": "197443943284211712",
     "ownerTag": "Game#0005"
 }
