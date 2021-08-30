@@ -24,7 +24,7 @@ module.exports = {
         let pingEmbed = new MessageEmbed()
             .setColor(pf.color)
             .setTitle("Hypixel Stats | Info")
-            .setDescription(`Made by <:game:873909546723213312>\`Game#0005\`\n<:djs:873908889110847539> Discord.JS: **v13.0.1** | <:nodejs:873908889337352242> Node.JS: **v15.7.0**\n
+            .setDescription(`Made by <:game:880825348407820298>\`Game#0005\`\n<:djs:873908889110847539> Discord.JS: **v13.0.1** | <:nodejs:873908889337352242> Node.JS: **v15.7.0**\n
             Guilds: \`${client.guilds.cache.size}\` | Users: \`${totalMembers}\`
             CPU Usage: \`${CpuUsed}\` | RAM Usage: \`${RAMUsed} / ${RAMMax} (${RAMPercent}%)\`
             Commands Ran: \`${cmdTotal}\` | Messages Received: \`${msgsTotal}\`
